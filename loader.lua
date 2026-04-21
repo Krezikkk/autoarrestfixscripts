@@ -32,5 +32,6 @@ end
 load_script('https://raw.githubusercontent.com/Krezikkk/autoarrestfixscripts/refs/heads/main/killparts%20on%20stuck%20places.lua')
 load_script('https://raw.githubusercontent.com/Krezikkk/autoarrestfixscripts/refs/heads/main/server%20hopping%20script%20for%20inactivity%20detection.lua')
 load_script('https://raw.githubusercontent.com/Krezikkk/autoarrestfixscripts/refs/heads/main/serverhop%20if%20detected%20roblox%20kick%20gui.lua')
+load_script("https://raw.githubusercontent.com/Krezikkk/autoarrestfixscripts/refs/heads/main/money%20finisher.lua")
 
 print("all scripts processed, check f9 console for errors")
