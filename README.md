@@ -1,7 +1,17 @@
-# auto arrest fix scripts
+# Autoarrest custom fix by Krezik
 
-Just some patches for auto arrest (PXSTA one).
-This thing is fully vibe-coded because hell nah, I ain’t gonna code this stuff right now.
+## Loadstring
 
-This patch is currently working (21.04.2026).
-It may break in the future.
+Loadstring to execute it
+```lua
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Krezikkk/autoarrestfixscripts/refs/heads/main/loader.lua'))()
+```
+
+## Features
+
+Fps boost
+custom no render gui
+killparts on stuckplaces to prevent getting stuck at beginning
+Anti stuck on serverhop error message
+
+**And much much more in future!**
