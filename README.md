@@ -2,7 +2,8 @@
 
 ## Loadstring
 
-Loadstring to execute it
+Loadstring to execute it (SELIWARE ONLY)
+
 ```lua
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Krezikkk/autoarrestfixscripts/refs/heads/main/loader.lua'))()
 ```
@@ -10,8 +11,8 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/Krezikkk/autoarrestfi
 ## Features
 
 - Fps boost
-- custom no render gui
-- killparts on stuckplaces to prevent getting stuck at beginning
+- Сustom no render gui
+- Kill parts on stuck places to prevent getting stuck at the start.
 - Anti stuck on serverhop error message
 
 **And much much more in future!**
