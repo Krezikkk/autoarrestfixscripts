@@ -105,9 +105,7 @@ exitBtn.ZIndex = 2
 exitBtn.Parent = buttonsFrame
 Instance.new("UICorner", exitBtn).CornerRadius = UDim.new(0, 8)
 
--- ==========================================
 -- Facts Panel (Bottom)
--- ==========================================
 local factsText = Instance.new("TextLabel")
 factsText.Size = UDim2.new(0, 460, 0, 80)
 factsText.Position = UDim2.new(0.5, -230, 0.5, 80)
@@ -130,7 +128,7 @@ factsPadding.PaddingRight = UDim.new(0, 15)
 factsPadding.PaddingBottom = UDim.new(0, 15)
 factsPadding.Parent = factsText
 
--- Variables for Event Connections (to prevent memory leaks)
+-- Variables for Event Connections
 local inputBeganConn
 local inputEndedConn
 local isExiting = false
@@ -139,19 +137,13 @@ local timerTask
 -- Exit Button Logic
 exitBtn.MouseButton1Click:Connect(function()
     if isExiting then
-        -- 1. Restore Render
         RunService:Set3dRenderingEnabled(true)
-        
-        -- 2. Disconnect key events to fix the bug
         if inputBeganConn then inputBeganConn:Disconnect() end
         if inputEndedConn then inputEndedConn:Disconnect() end
-        
-        -- 3. Destroy GUI
         screenGui:Destroy()
     else
         isExiting = true
         exitBtn.BackgroundColor3 = Color3.fromRGB(255, 180, 0)
-        
         local timeLeft = 3
         exitBtn.Text = "CONFIRM (" .. timeLeft .. "s)"
         
@@ -173,7 +165,7 @@ exitBtn.MouseButton1Click:Connect(function()
     end
 end)
 
--- Render Control Logic (Saved to variables)
+-- Render Control Logic
 inputBeganConn = UIS.InputBegan:Connect(function(input, gpe)
     if gpe then return end
     if input.KeyCode == Enum.KeyCode.E then
@@ -195,32 +187,22 @@ task.spawn(function()
         local size = math.random(8, 25)
         local particle = Instance.new("Frame")
         particle.Size = UDim2.new(0, size, 0, size)
-        
         particle.Position = UDim2.new(math.random(0, 1000) / 1000, 0, 1.1, 0)
-        
         particle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         particle.BackgroundTransparency = math.random(85, 95) / 100
         particle.BorderSizePixel = 0
         particle.ZIndex = 1
-        
         Instance.new("UICorner", particle).CornerRadius = UDim.new(1, 0)
         particle.Parent = particleContainer
         
         local duration = math.random(15, 30)
         local targetPos = UDim2.new(math.random(0, 1000) / 1000, 0, -0.2, 0)
-        
-        local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Linear)
-        local tween = TweenService:Create(particle, tweenInfo, {
+        local tween = TweenService:Create(particle, TweenInfo.new(duration, Enum.EasingStyle.Linear), {
             Position = targetPos,
             BackgroundTransparency = 1
         })
-        
         tween:Play()
-        
-        tween.Completed:Connect(function()
-            particle:Destroy()
-        end)
-        
+        tween.Completed:Connect(function() particle:Destroy() end)
         task.wait(math.random(2, 6) / 10)
     end
 end)
@@ -228,7 +210,7 @@ end)
 -- Disable render initially
 RunService:Set3dRenderingEnabled(false)
 
--- Stats Update Loop
+-- Stats Update Loop & Kick Logic
 task.spawn(function()
     while screenGui.Parent do
         local stats = player:FindFirstChild("leaderstats")
@@ -236,6 +218,14 @@ task.spawn(function()
         
         if money then
             local current = money.Value
+            
+            -- Kick if goal reached
+            if current >= limit then
+                RunService:Set3dRenderingEnabled(true)
+                player:Kick("\n[RenderShield]\nGoal reached! Collected: " .. format(current))
+                break
+            end
+            
             local remaining = limit - current
             if remaining < 0 then remaining = 0 end
             
@@ -252,9 +242,7 @@ task.spawn(function()
     end
 end)
 
--- ==========================================
 -- Facts Logic System
--- ==========================================
 local interestingFacts = {
     "i have no idea what type here",
     "Companies don’t care about you.",
@@ -271,7 +259,6 @@ task.spawn(function()
     while screenGui.Parent do
         local randomFact = interestingFacts[math.random(1, #interestingFacts)]
         factsText.Text = "Did you know?\n\n" .. randomFact
-        
         task.wait(15)
     end
 end)
