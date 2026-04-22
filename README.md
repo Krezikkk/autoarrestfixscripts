@@ -9,9 +9,9 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/Krezikkk/autoarrestfi
 
 ## Features
 
-Fps boost
-custom no render gui
-killparts on stuckplaces to prevent getting stuck at beginning
-Anti stuck on serverhop error message
+- Fps boost
+- custom no render gui
+- killparts on stuckplaces to prevent getting stuck at beginning
+- Anti stuck on serverhop error message
 
 **And much much more in future!**
